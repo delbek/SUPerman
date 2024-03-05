@@ -2,4 +2,7 @@ site_name: SUPerman
 site_url: https://delbek.github.io/SUPerman/
 nav:
   - Home: index.md
+  - Usage: usage.md
+  - Algorithms: implementations.md
+  - Examples: examples.md
 theme: readthedocs

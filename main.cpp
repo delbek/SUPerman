@@ -26,11 +26,7 @@
 //
 #include "read_matrix.hpp"
 //
-#ifndef ONLYCPU
-#include "mmio.c" //This is erroneous but works for now
-#else
-#include "mmio.h"
-#endif
+#include "MatrixMarketIOLibrary.h"
 
 #include <cfenv>
 
@@ -1622,12 +1618,12 @@ int main (int argc, char **argv)
     if(RANK==0) printf("Error opening the file, exiting.. \n");
     exit(1);
   }
-  
+
   if(mm_read_banner(f, &matcode) != 0){
     if(RANK==0) printf("Could not process Matrix Market Banner, exiting.. \n");
     exit(1);
   }
-  
+
   if(mm_is_matrix(matcode) != 1){
     if(RANK==0) printf("SUPerman only supports matrices, exiting.. \n");
     exit(1);
@@ -1637,7 +1633,7 @@ int main (int argc, char **argv)
     if(RANK==0) printf("SUPerman only supports mtx format at the moment, exiting.. \n");
     exit(1);
   }
-  
+
   if((ret_code = mm_read_mtx_crd_size(f, &M, &N, &nz)) != 0){
     if(RANK==0) printf("Matrix size cannot be read, exiting.. \n");
   }
