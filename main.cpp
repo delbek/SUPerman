@@ -5,7 +5,6 @@
 #include <unistd.h>
 #include <omp.h>
 #include <stdio.h>
-#include <getopt.h>
 #include "util.h" //evaluate_data_return_parameters() --> To be implemented
 #include <iomanip> //To debug avx vectors clearly
 
@@ -40,6 +39,7 @@
 //#define STRUCTURAL
 //#define HEAVYDEBUG
 
+#include "args.hpp"
 
 using namespace std;
 
@@ -1576,231 +1576,17 @@ int main (int argc, char **argv)
     std::cout << std::endl;
   }
   
-  bool generic = true;
-  bool dense = true;
-  bool approximation = false;
-  bool calculation_half_precision = false;
-  bool storage_half_precision = false;
-  bool gpu = false;
-  bool cpu = false;
-  int gpu_num = 2;
-  int threads = 16;
-  //string filename;
-  int perman_algo = 1;
-  int preprocessing = 0;
 
-  int number_of_times = 100000;
-  int scale_intervals = 4;
-  int scale_times = 5;
-
-  bool grid_graph = false;
-  int gridm = 36;
-  int gridn = 36;
-
-  bool compression = false;
+  auto args = argparse::parse<Args>(argc, argv);
+  flags flags = args.to_flags();
   
-  // We need to handle this part with a constructor
-
-  flags flags;
-  /* A string listing valid short options letters.  */
-  const char* const short_options = "bsr:t:f:gd:cap:x:y:z:im:n:hwqk:e:ol:vu:j";
-  /* An array describing valid long options.  */
-  const struct option long_options[] = {
-    { "binary",     0, NULL, 'b' },
-    { "sparse",     0, NULL, 's' },
-    { "preprocessing",   1, NULL, 'r' },
-    { "threads",  1, NULL, 't' },
-    { "file",  1, NULL, 'f' },
-    { "gpu",  0, NULL, 'g' },
-    { "nodevice",  1, NULL, 'd' },
-    { "deviceid" , 0, NULL, 'l'},
-    { "cpu",  0, NULL, 'c' },
-    { "approximation",  0, NULL, 'a' },
-    { "perman",  1, NULL, 'p' },
-    { "numOfTimes",  1, NULL, 'x' },
-    { "scaleIntervals",  1, NULL, 'y' },
-    { "scaleTimes",  1, NULL, 'z' },
-    { "grid",  0, NULL, 'i' },
-    { "gridm",  1, NULL, 'm' },
-    { "gridn",  1, NULL, 'n' },
-    { "calchalfprec" , 0, NULL, 'h'},
-    { "calcquadprec", 0, NULL, 'q'},
-    { "storhalfprec" , 0, NULL, 'w'},
-    { "storquadprec" , 0, NULL, 'v'},
-    { "norep", 1, NULL, 'k'},
-    { "gridmultip", 1, NULL, 'e'},
-    { "compression", 0, NULL, 'o'},
-    { "scalingthresh", 0, NULL, 'u'},
-    { "syncgray", 0, NULL, 'j'},
-    
-    { NULL,       0, NULL, 0   }   /* Required at end of array.  */
-  };
-
-    
-  std::string holder;
-  int next_option;
-  do {
-    next_option = getopt_long(argc, argv, short_options, long_options, NULL);
-    switch (next_option)
-      {
-      case 'b':
-        flags.binary_graph = true;
-        break;
-      case 's':
-	flags.dense = 0;
-	flags.sparse = 1;
-        break;
-      case 'r':
-        if (optarg[0] == '-'){
-          fprintf (stderr, "Option -r requires an argument.\n");
-          return 1;
-        }
-	flags.preprocessing = atoi(optarg); //1->sortorder | 2->skiporder
-	break;
-      case 't':
-        if (optarg[0] == '-'){
-          fprintf (stderr, "Option -t requires an argument.\n");
-          return 1;
-        }
-        flags.threads = atoi(optarg);
-        break;
-      case 'f':
-	if (optarg[0] == '-'){
-	  fprintf (stderr, "Option -f requires an argument.\n");
-          return 1;
-        }
-	holder = optarg;
-        flags.filename = holder.c_str();
-	break;
-      case 'a':
-        flags.approximation = true;
-	flags.binary_graph = true;
-	flags.exact = false;
-        break;
-      case 'g':
-	flags.gpu = 1;
-	flags.gpu_stated = 1;
-        break;
-      case 'c':
-        flags.cpu = 1;
-	if(!flags.gpu_stated)
-	  flags.gpu = 0; //Prevents multiple execution in case of sole -c
-        break;
-      case 'd':
-        if (optarg[0] == '-'){
-          fprintf (stderr, "Option -d requires an argument.\n");
-          return 1;
-        }
-        flags.gpu_num = atoi(optarg);
-        break;
-      case 'p':
-        if (optarg[0] == '-'){
-          fprintf (stderr, "Option -p requires an argument.\n");
-          return 1;
-        }
-        flags.perman_algo = atoi(optarg);
-        break;
-      case 'x':
-        if (optarg[0] == '-'){
-          fprintf (stderr, "Option -x requires an argument.\n");
-          return 1;
-        }
-        flags.number_of_times = atoi(optarg);
-        break;
-      case 'y':
-        if (optarg[0] == '-'){
-          fprintf (stderr, "Option -y requires an argument.\n");
-          return 1;
-        }
-        flags.scale_intervals = atoi(optarg);
-        break;
-      case 'z':
-        if (optarg[0] == '-'){
-          fprintf (stderr, "Option -z requires an argument.\n");
-          return 1;
-        }
-        flags.scale_times = atoi(optarg);
-        break;
-      case 'i':
-        flags.grid_graph = true;
-        break;
-      case 'm':
-        if (optarg[0] == '-'){
-          fprintf (stderr, "Option -m requires an argument.\n");
-          return 1;
-        }
-        flags.gridm = atoi(optarg);
-        break;
-      case 'n':
-        if (optarg[0] == '-'){
-          fprintf (stderr, "Option -n requires an argument.\n");
-          return 1;
-        }
-        flags.gridn = atoi(optarg);
-        break;
-      case 'h':
-	flags.calculation_half_precision = 1;
-	break;
-      case 'q':
-	flags.calculation_quad_precision = 1;
-	break;
-      case 'w':
-	flags.storage_half_precision = 1;
-	break;
-      case 'v':
-	flags.storage_quad_precision = 1;
-	break;
-      case 'l':
-	if(optarg[0] == '-'){
-	  fprintf(stderr, "Option -l requires an argument. \n");
-	  return 1;
-	}
-	flags.device_id = atoi(optarg);
-	break;
-      case 'k':
-	if(optarg[0] == '-'){
-	  fprintf(stderr, "Option -k requires an argument \n");
-	}
-	flags.rep = atoi(optarg);
-	break;
-      case 'e':
-	if(optarg[0] == '-'){
-	  fprintf(stderr, "Option -e requires an argument \n");
-	}
-	flags.grid_multip = atoi(optarg);
-	break;
-      case 'o':
-	flags.compression = 1;
-	break;
-      case 'u':
-	flags.scaling_threshold = (double)atoi(optarg);
-	break;
-      case 'j':
-	flags.synchronized_gray = 1;
-	break;
-      case '?':
-        return 1;
-      case -1:    /* Done with options.  */
-        break;
-      default:
-        abort ();
-      }
-    
-  } while (next_option != -1);
-  
-  
-  if (!grid_graph && flags.filename == "") {
-    fprintf (stderr, "Option -f is a required argument.\n");
+  if (!flags.grid_graph && flags.filename == "") {
+    fprintf (stderr, "Filename required as positional argument. See help with --help.\n");
     return 1;
   }
   
-  for (int index = optind; index < argc; index++)
-    {
-      if(RANK==0) printf ("Non-option argument %s\n", argv[index]);
-    }
-  
   if (!flags.cpu && !flags.gpu) {
-    gpu = true;
+    flags.gpu = true;
   }
 
   if(flags.gpu && (flags.storage_quad_precision || flags.calculation_quad_precision)){
