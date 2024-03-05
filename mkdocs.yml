@@ -1,5 +1,0 @@
-site_name: SUPerman
-site_url: https://delbek.github.io/SUPerman/
-nav:
-  - Home: index.md
-theme: readthedocs
