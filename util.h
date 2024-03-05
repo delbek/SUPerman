@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
+#include <cstdint>
 #include <ctime>
 #include <cassert>
 
