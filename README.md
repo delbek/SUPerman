@@ -6,8 +6,8 @@
 
 Supported platforms: gcc 9.4.0, CUDA 10.1
 
-📚 Documentation
+[📚 Documentation](https://delbek.github.io/SUPerman/)
 
-💻 Source Code
+[💻 Source Code](https://github.com/delbek/SUPerman)
 
 📜 License
