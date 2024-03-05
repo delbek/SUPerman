@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://delbek.github.io/SUPerman/implementations/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Algorithms - SUPerman</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Algorithms";
+        var mkdocs_page_input_path = "implementations.md";
+        var mkdocs_page_url = "/SUPerman/implementations/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> SUPerman
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../usage/">Usage</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Algorithms</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#available-algorithms">Available Algorithms</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#legend">Legend</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../examples/">Examples</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">SUPerman</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Algorithms</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="implementations">Implementations</h1>
+<p>SUPerman offers a wide range of algorithms for computing the permanent of matrices, catering to different needs such as exact or approximate calculations, and support for both dense and sparse matrix representations. The following table outlines the available implementations, their key features, applicable flags, and assumptions.</p>
+<h2 id="available-algorithms">Available Algorithms</h2>
+<table>
+<thead>
+<tr>
+<th>Implementation</th>
+<th>Device</th>
+<th>Calculation</th>
+<th>Matrix Type</th>
+<th>CPU Flag</th>
+<th>Threads</th>
+<th>GPU Flag</th>
+<th>Algo ID</th>
+<th>Approximation</th>
+<th>Sparse</th>
+<th>Preprocessing</th>
+<th>Assumption</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>parallel_perman64()</code></td>
+<td>CPU</td>
+<td>Exact</td>
+<td>Dense</td>
+<td>Yes</td>
+<td>1-64</td>
+<td>No</td>
+<td>1</td>
+<td>No</td>
+<td>No</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td><code>parallel_perman64_sparse()</code></td>
+<td>CPU</td>
+<td>Exact</td>
+<td>Sparse</td>
+<td>Yes</td>
+<td>1-64</td>
+<td>No</td>
+<td>1</td>
+<td>No</td>
+<td>Yes</td>
+<td>Optional (-r)</td>
+<td>-r1</td>
+</tr>
+<tr>
+<td><code>parallel_skip_perman64_w()</code></td>
+<td>CPU</td>
+<td>Exact</td>
+<td>Sparse</td>
+<td>Yes</td>
+<td>1-64</td>
+<td>No</td>
+<td>2</td>
+<td>No</td>
+<td>Yes</td>
+<td>Optional (-r)</td>
+<td>-r2</td>
+</tr>
+<tr>
+<td><code>parallel_skip_perman64_w_balanced()</code></td>
+<td>CPU</td>
+<td>Exact</td>
+<td>Sparse</td>
+<td>Yes</td>
+<td>1-64</td>
+<td>No</td>
+<td>3</td>
+<td>No</td>
+<td>Yes</td>
+<td>Optional (-r)</td>
+<td>-r2</td>
+</tr>
+<tr>
+<td><code>rasmussen()</code></td>
+<td>CPU</td>
+<td>Approx</td>
+<td>Dense</td>
+<td>Yes</td>
+<td>1-64</td>
+<td>No</td>
+<td>1</td>
+<td>Yes</td>
+<td>No</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td><code>approximation_perman64()</code></td>
+<td>CPU</td>
+<td>Approx</td>
+<td>Dense</td>
+<td>Yes</td>
+<td>1-64</td>
+<td>No</td>
+<td>2</td>
+<td>Yes</td>
+<td>No</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td><code>rasmussen_sparse()</code></td>
+<td>CPU</td>
+<td>Approx</td>
+<td>Sparse</td>
+<td>Yes</td>
+<td>1-64</td>
+<td>No</td>
+<td>1</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td><code>approximation_perman64_sparse()</code></td>
+<td>CPU</td>
+<td>Approx</td>
+<td>Sparse</td>
+<td>Yes</td>
+<td>1-64</td>
+<td>No</td>
+<td>2</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td><code>gpu_perman64_xglobal()</code></td>
+<td>GPU</td>
+<td>Exact</td>
+<td>Dense</td>
+<td>No</td>
+<td>-</td>
+<td>Yes</td>
+<td>21</td>
+<td>No</td>
+<td>No</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td><code>gpu_perman64_xlocal()</code></td>
+<td>GPU</td>
+<td>Exact</td>
+<td>Dense</td>
+<td>No</td>
+<td>-</td>
+<td>Yes</td>
+<td>1</td>
+<td>No</td>
+<td>No</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>...</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>gpu_perman64_xshared_lbc_mshared_multigpucpu_chunks()</code></td>
+<td>GPU+CPU</td>
+<td>Exact</td>
+<td>Dense</td>
+<td>Optional</td>
+<td>1-64</td>
+<td>Yes</td>
+<td>7</td>
+<td>No</td>
+<td>No</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td><code>gpu_perman64_xlocal_sparse()</code></td>
+<td>GPU</td>
+<td>Exact</td>
+<td>Sparse</td>
+<td>No</td>
+<td>-</td>
+<td>Yes</td>
+<td>1</td>
+<td>No</td>
+<td>Yes</td>
+<td>Optional (-r)</td>
+<td>-r1</td>
+</tr>
+<tr>
+<td><code>gpu_perman64_xshared_sparse()</code></td>
+<td>GPU</td>
+<td>Exact</td>
+<td>Sparse</td>
+<td>No</td>
+<td>-</td>
+<td>Yes</td>
+<td>2</td>
+<td>No</td>
+<td>Yes</td>
+<td>Optional (-r)</td>
+<td>-r1</td>
+</tr>
+<tr>
+<td>...</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>gpu_perman64_approximation_shared_multigpucpu_chunks()</code></td>
+<td>GPU+CPU</td>
+<td>Approx</td>
+<td>Dense</td>
+<td>Optional</td>
+<td>1-64</td>
+<td>Yes</td>
+<td>8</td>
+<td>Yes</td>
+<td>No</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td><code>gpu_perman64_rasmussen_global_sparse()</code></td>
+<td>GPU</td>
+<td>Approx</td>
+<td>Sparse</td>
+<td>No</td>
+<td>-</td>
+<td>Yes</td>
+<td>1</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>...</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="legend">Legend</h3>
+<ul>
+<li><strong>Device</strong>: The computing device(s) the algorithm runs on (CPU, GPU, or distributed GPUs).</li>
+<li><strong>Calculation</strong>: Specifies whether the algorithm performs exact or approximate calculations.</li>
+<li><strong>Matrix Type</strong>: Indicates whether the algorithm is designed for dense or sparse matrices.</li>
+<li><strong>CPU Flag (<code>-c</code>)</strong>: Indicates if the algorithm can run on CPU. "Yes" means CPU is supported; "Optional" indicates the algorithm can run on both CPU and GPU; "No" indicates GPU only.</li>
+<li><strong>Threads (<code>-t</code>)</strong>: The range of CPU threads that can be utilized.</li>
+<li><strong>GPU Flag (<code>-g</code>)</strong>: Specifies if the algorithm supports execution on GPU.</li>
+<li><strong>Algo ID (<code>-p</code>)</strong>: The identifier used to select the algorithm via command-line.</li>
+<li><strong>Approximation (<code>-a</code>)</strong>: Indicates if the algorithm performs approximation calculations.</li>
+<li><strong>Sparse (<code>-s</code>)</strong>: Denotes whether the algorithm is optimized for sparse matrices.</li>
+<li><strong>Preprocessing (<code>-r</code>)</strong>: Specifies if preprocessing can be applied, and under what conditions.</li>
+<li><strong>Assumption</strong>: Any specific assumptions or conditions unique to the algorithm.</li>
+</ul>
+<p>This table provides a comprehensive overview of the algorithms available in SUPerman for computing matrix permanents. Users can select the most suitable algorithm based on their specific requirements, including the type of matrix, desired accuracy, and available hardware resources.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../usage/" class="btn btn-neutral float-left" title="Usage"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../examples/" class="btn btn-neutral float-right" title="Examples">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../usage/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../examples/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://delbek.github.io/SUPerman/examples/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Examples - SUPerman</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Examples";
+        var mkdocs_page_input_path = "examples.md";
+        var mkdocs_page_url = "/SUPerman/examples/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> SUPerman
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../usage/">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../implementations/">Algorithms</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Examples</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#basic-usage-examples">Basic Usage Examples</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#advanced-configuration-examples">Advanced Configuration Examples</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#distributed-computing-examples">Distributed Computing Examples</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#high-precision-calculation-examples">High Precision Calculation Examples</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">SUPerman</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Examples</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="example-commands">Example Commands</h1>
+<p>This document provides practical examples of how to run SUPerman with various configurations. These examples demonstrate the versatility of SUPerman in handling different matrix types, computational preferences, and hardware settings.</p>
+<h2 id="basic-usage-examples">Basic Usage Examples</h2>
+<ol>
+<li>
+<p><strong>Running on GPU with Default Algorithm</strong>
+    <code>bash
+    ./gpu_perman -f ex.mtx -p 1</code>
+   Calls <code>gpu_perman_xlocal()</code> for GPU device 0.</p>
+</li>
+<li>
+<p><strong>Running on GPU with Binary Matrix Conversion</strong>
+    <code>bash
+    ./gpu_perman -f ex.mtx -p 1 -b</code>
+   Calls <code>gpu_perman_xlocal()</code> for GPU device 0, converting the matrix to binary format.</p>
+</li>
+<li>
+<p><strong>Sparse Matrix on GPU with Binary Conversion</strong>
+    <code>bash
+    ./gpu_perman -f ex.mtx -s -p 1 -b</code>
+   Calls <code>gpu_perman_xlocal_sparse()</code> for GPU device 0, converting the matrix to binary format.</p>
+</li>
+<li>
+<p><strong>Sparse Matrix on Specific GPU Device</strong>
+    <code>bash
+    ./gpu_perman -f ex.mtx -s -p 1 -l2</code>
+   Calls <code>gpu_perman_xlocal_sparse()</code> for GPU device 2.</p>
+</li>
+</ol>
+<h2 id="advanced-configuration-examples">Advanced Configuration Examples</h2>
+<ol>
+<li>
+<p><strong>Sparse Matrix Calculation on CPU with Multiple Threads</strong>
+    <code>bash
+    ./gpu_perman -f ex.mtx -s -p 1 -c -t 32</code>
+   Calls <code>parallel_perman_sparse()</code> using 32 CPU threads.</p>
+</li>
+<li>
+<p><strong>Multi-GPU Execution</strong>
+    <code>bash
+    ./gpu_perman -f ex.mtx -p 5 -d 4</code>
+   Executes <code>gpu_perman64_xshared_lbc_mshared_multigpu()</code> on 4 GPUs.</p>
+</li>
+<li>
+<p><strong>Hybrid Multi-GPU and Multi-CPU Execution with Sparse Matrix</strong>
+    <code>bash
+    ./gpu_perman -f ex.mtx -s -p 5 -d 4 -c -t 64</code>
+   Runs <code>gpu_perman64_xshared_lbc_mshared_multigpucpu_chunks_sparse()</code> on 4 GPUs and 64 CPU threads.</p>
+</li>
+</ol>
+<h2 id="distributed-computing-examples">Distributed Computing Examples</h2>
+<ol>
+<li><strong>Distributed GPUs Execution</strong>
+    <code>bash
+    mpi_run -np 16 ./mpi_perman -f ex.mtx -s -p 5 -d 4 -c -t 64</code>
+   Invokes <code>gpu_perman64_xregister_lbc_plainmatrix_mshared_mpi()</code> to run on 16 distributed GPUs.</li>
+</ol>
+<h2 id="high-precision-calculation-examples">High Precision Calculation Examples</h2>
+<ol>
+<li><strong>High Precision Sparse Matrix Calculation on CPU</strong>
+    <code>bash
+    ./cpu_perman -f ex.mtx -s -p 1 -c -t 32 -q -v</code>
+   Executes <code>parallel_perman_sparse()</code> with 32 threads, using a 128-bit data type for both calculation and storage.</li>
+</ol>
+<p>These examples showcase just a fraction of SUPerman's capabilities, providing a starting point for users to explore the tool's full potential. Adjust the commands according to your specific needs, matrix types, and available hardware resources.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../implementations/" class="btn btn-neutral float-left" title="Algorithms"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../implementations/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -5,4 +5,19 @@
          <lastmod>2024-03-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
+    <url>
+         <loc>https://delbek.github.io/SUPerman/examples/</loc>
+         <lastmod>2024-03-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://delbek.github.io/SUPerman/implementations/</loc>
+         <lastmod>2024-03-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://delbek.github.io/SUPerman/usage/</loc>
+         <lastmod>2024-03-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
 </urlset>
