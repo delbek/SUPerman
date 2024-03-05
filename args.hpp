@@ -3,7 +3,7 @@
 
 struct Args : argparse::Args {
     std::string &filename = arg("filename", "The path to the matrix file").set_default("");
-    int &algoId = kwarg("p,algo", "The algorithm to use").set_default(0);
+    int &algoId = kwarg("p,algo", "The algorithm to use").set_default(1);
     int &threads = kwarg("t,threads", "The number of threads to use").set_default(16); 
     int &devices = kwarg("d,devices", "The number of devices to be used in a multi-GPU algorithm").set_default(2);
     int &trials = kwarg("x,trials", "The number of trials to run for an approximation algorithm").set_default(100000);
