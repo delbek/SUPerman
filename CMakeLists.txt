@@ -10,7 +10,7 @@ find_package(OpenMP REQUIRED)
 find_package(CUDAToolkit REQUIRED)
 find_package(MPI)
 
-# Include directories (if necessary)
+# Include directories
 include_directories(${CUDA_INCLUDE_DIRS})
 
 # Source files
