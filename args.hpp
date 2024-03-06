@@ -15,7 +15,7 @@ struct Args : argparse::Args {
     bool &cpu = flag("c,cpu", "Runs the algorithm on the CPU (if given with -g, runs a hybrid algorithm)");
     int &preprocessing = kwarg("r,preprocessing", "Preprocessing to be applied (1: SortOrder, 2: SkipOrder)").set_default(0); 
 
-    bool &grid = flag("g,grid", "Creates a grid graph and uses a sparse approximation algorithm"); 
+    bool &grid = flag("i,grid", "Creates a grid graph and uses a sparse approximation algorithm"); 
     int &gridm = kwarg("m,grid-m", "First dimension of the grid graph").set_default(-1); 
     int &gridn = kwarg("n,grid-n", "Second dimension of the grid graph").set_default(-1);
 

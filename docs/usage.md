@@ -6,9 +6,12 @@ SUPerman is a high-performance computational tool designed for the efficient cal
 
 SUPerman can be executed with a range of arguments to specify the computation's nature, the hardware to be used, and the type of algorithm, among other settings. Below is a detailed explanation of each argument:
 
-### Required Argument
+### Usage
 
-- `-f, --file <path>`: Specifies the path to the matrix file that will be processed. This argument is required for all operations.
+`cpu_perman [FILE] [OPTION]...`
+`gpu_perman [FILE] [OPTION]...`
+`mpi_perman [FILE] [OPTION]...`
+where `FILE` is the path to the matrix.
 
 ### Algorithm Selection
 
