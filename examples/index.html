@@ -95,25 +95,25 @@
 <li>
 <p><strong>Running on GPU with Default Algorithm</strong>
     <code>bash
-    ./gpu_perman -f ex.mtx -p 1</code>
+    ./gpu_perman ex.mtx -p 1</code>
    Calls <code>gpu_perman_xlocal()</code> for GPU device 0.</p>
 </li>
 <li>
 <p><strong>Running on GPU with Binary Matrix Conversion</strong>
     <code>bash
-    ./gpu_perman -f ex.mtx -p 1 -b</code>
+    ./gpu_perman ex.mtx -p 1 -b</code>
    Calls <code>gpu_perman_xlocal()</code> for GPU device 0, converting the matrix to binary format.</p>
 </li>
 <li>
 <p><strong>Sparse Matrix on GPU with Binary Conversion</strong>
     <code>bash
-    ./gpu_perman -f ex.mtx -s -p 1 -b</code>
+    ./gpu_perman ex.mtx -s -p 1 -b</code>
    Calls <code>gpu_perman_xlocal_sparse()</code> for GPU device 0, converting the matrix to binary format.</p>
 </li>
 <li>
 <p><strong>Sparse Matrix on Specific GPU Device</strong>
     <code>bash
-    ./gpu_perman -f ex.mtx -s -p 1 -l2</code>
+    ./gpu_perman ex.mtx -s -p 1 -l2</code>
    Calls <code>gpu_perman_xlocal_sparse()</code> for GPU device 2.</p>
 </li>
 </ol>
@@ -122,19 +122,19 @@
 <li>
 <p><strong>Sparse Matrix Calculation on CPU with Multiple Threads</strong>
     <code>bash
-    ./gpu_perman -f ex.mtx -s -p 1 -c -t 32</code>
+    ./gpu_perman ex.mtx -s -p 1 -c -t 32</code>
    Calls <code>parallel_perman_sparse()</code> using 32 CPU threads.</p>
 </li>
 <li>
 <p><strong>Multi-GPU Execution</strong>
     <code>bash
-    ./gpu_perman -f ex.mtx -p 5 -d 4</code>
+    ./gpu_perman ex.mtx -p 5 -d 4</code>
    Executes <code>gpu_perman64_xshared_lbc_mshared_multigpu()</code> on 4 GPUs.</p>
 </li>
 <li>
 <p><strong>Hybrid Multi-GPU and Multi-CPU Execution with Sparse Matrix</strong>
     <code>bash
-    ./gpu_perman -f ex.mtx -s -p 5 -d 4 -c -t 64</code>
+    ./gpu_perman ex.mtx -s -p 5 -d 4 -c -t 64</code>
    Runs <code>gpu_perman64_xshared_lbc_mshared_multigpucpu_chunks_sparse()</code> on 4 GPUs and 64 CPU threads.</p>
 </li>
 </ol>
@@ -142,14 +142,14 @@
 <ol>
 <li><strong>Distributed GPUs Execution</strong>
     <code>bash
-    mpi_run -np 16 ./mpi_perman -f ex.mtx -s -p 5 -d 4 -c -t 64</code>
+    mpi_run -np 16 ./mpi_perman ex.mtx -s -p 5 -d 4 -c -t 64</code>
    Invokes <code>gpu_perman64_xregister_lbc_plainmatrix_mshared_mpi()</code> to run on 16 distributed GPUs.</li>
 </ol>
 <h2 id="high-precision-calculation-examples">High Precision Calculation Examples</h2>
 <ol>
 <li><strong>High Precision Sparse Matrix Calculation on CPU</strong>
     <code>bash
-    ./cpu_perman -f ex.mtx -s -p 1 -c -t 32 -q -v</code>
+    ./cpu_perman ex.mtx -s -p 1 -c -t 32 -q -v</code>
    Executes <code>parallel_perman_sparse()</code> with 32 threads, using a 128-bit data type for both calculation and storage.</li>
 </ol>
 <p>These examples showcase just a fraction of SUPerman's capabilities, providing a starting point for users to explore the tool's full potential. Adjust the commands according to your specific needs, matrix types, and available hardware resources.</p>
