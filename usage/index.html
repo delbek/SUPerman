@@ -48,7 +48,7 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#executable-arguments-overview">Executable Arguments Overview</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#required-argument">Required Argument</a>
+    <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#algorithm-selection">Algorithm Selection</a>
     </li>
@@ -102,10 +102,11 @@
 <p>SUPerman is a high-performance computational tool designed for the efficient calculation of matrix permanents utilizing CPUs, GPUs, and distributed computing environments. This guide outlines the various executable arguments available to customize your computation tasks.</p>
 <h2 id="executable-arguments-overview">Executable Arguments Overview</h2>
 <p>SUPerman can be executed with a range of arguments to specify the computation's nature, the hardware to be used, and the type of algorithm, among other settings. Below is a detailed explanation of each argument:</p>
-<h3 id="required-argument">Required Argument</h3>
-<ul>
-<li><code>-f, --file &lt;path&gt;</code>: Specifies the path to the matrix file that will be processed. This argument is required for all operations.</li>
-</ul>
+<h3 id="usage">Usage</h3>
+<p><code>cpu_perman [FILE] [OPTION]...</code>
+<code>gpu_perman [FILE] [OPTION]...</code>
+<code>mpi_perman [FILE] [OPTION]...</code>
+where <code>FILE</code> is the path to the matrix.</p>
 <h3 id="algorithm-selection">Algorithm Selection</h3>
 <ul>
 <li><code>-p, --perman &lt;id&gt;</code>: Selects the algorithm for permanent calculation. Default is <code>0</code>.</li>
