@@ -11,8 +11,7 @@ struct Args : argparse::Args {
     bool &sparse = flag("s,sparse", "Runs the sparse algorithm");
     bool &approximation = flag("a,approximation", "Runs the approximation algorithm");
     bool &binary = flag("b,binary", "Treats the matrix as a binary matrix where all nonzero values are taken to be 1");
-    bool &gpu = flag("g,gpu", "Runs the algorithm on the GPU");
-    bool &cpu = flag("c,cpu", "Runs the algorithm on the CPU (if given with -g, runs a hybrid algorithm)");
+    bool &hybrid = flag("h,hybrid", "Runs a hybrid algorithm that utilizes both CPU and GPU");
     int &preprocessing = kwarg("r,preprocessing", "Preprocessing to be applied (1: SortOrder, 2: SkipOrder)").set_default(0); 
 
     bool &grid = flag("i,grid", "Creates a grid graph and uses a sparse approximation algorithm"); 
@@ -50,9 +49,25 @@ struct Args : argparse::Args {
         f.binary_graph = binary || approximation;
         f.number_of_times = trials;
 
-        f.gpu = gpu || (!gpu && !cpu);
-        f.gpu_stated = gpu;
-        f.cpu = cpu;
+#ifdef ONLYCPU
+        f.cpu = true;
+        f.gpu = false;
+        f.gpu_stated = false;
+#else
+        f.cpu = false;
+        if (hybrid)
+        {
+            f.cpu = true;
+        }
+        f.gpu = true;
+        f.gpu_stated = true;
+#endif
+#ifdef MPI_ENABLED
+        f.cpu = true;
+        f.gpu = true;
+        f.gpu_stated = true;
+#endif
+
         f.gpu_num = devices;
         f.device_id = gpuId;
 
