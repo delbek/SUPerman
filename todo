@@ -1,0 +1,10 @@
+remove debug values
+kahn summation -> first cpu and then gpu
+fix docs (flags)
+remove approximation codes
+cmakelists.txt -> if cuda is not available, then do not create gpu_perman and mpi_perman executable
+below %30 sparsity -> skipper sparse implementation otherwise sort order
+default ordering for sparse matrices
+sparsity -> above 0.5 -> dense could be better (tests needed)
+we can derive whether matrix is sparse or dense while reading mtx
+remove grid paths

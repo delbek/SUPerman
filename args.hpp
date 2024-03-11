@@ -63,7 +63,7 @@ struct Args : argparse::Args {
         f.gpu_stated = true;
 #endif
 #ifdef MPI_ENABLED
-        f.cpu = true;
+        f.cpu = false
         f.gpu = true;
         f.gpu_stated = true;
 #endif
