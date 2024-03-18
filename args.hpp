@@ -6,17 +6,11 @@ struct Args : argparse::Args {
     int &algoId = kwarg("p,algo", "The algorithm to use").set_default(1);
     int &threads = kwarg("t,threads", "The number of threads to use").set_default(16); 
     int &devices = kwarg("d,devices", "The number of devices to be used in a multi-GPU algorithm").set_default(2);
-    int &trials = kwarg("x,trials", "The number of trials to run for an approximation algorithm").set_default(100000);
 
     bool &sparse = flag("s,sparse", "Runs the sparse algorithm");
-    bool &approximation = flag("a,approximation", "Runs the approximation algorithm");
     bool &binary = flag("b,binary", "Treats the matrix as a binary matrix where all nonzero values are taken to be 1");
     bool &hybrid = flag("h,hybrid", "Runs a hybrid algorithm that utilizes both CPU and GPU");
     int &preprocessing = kwarg("r,preprocessing", "Preprocessing to be applied (1: SortOrder, 2: SkipOrder)").set_default(0); 
-
-    bool &grid = flag("i,grid", "Creates a grid graph and uses a sparse approximation algorithm"); 
-    int &gridm = kwarg("m,grid-m", "First dimension of the grid graph").set_default(-1); 
-    int &gridn = kwarg("n,grid-n", "Second dimension of the grid graph").set_default(-1);
 
     bool &use32bitCalculation = flag("calculate-32bit", "Use 32 bit data type for calculation");
     bool &use128bitCalculation = flag("calculate-128bit", "Use 128 bit data type for calculation (CPU Only)");
@@ -44,10 +38,7 @@ struct Args : argparse::Args {
 
         f.dense = !sparse;
         f.sparse = sparse;
-        f.exact = !approximation;
-        f.approximation = approximation;
-        f.binary_graph = binary || approximation;
-        f.number_of_times = trials;
+        f.binary_graph = binary;
 
 #ifdef ONLYCPU
         f.cpu = true;
@@ -78,9 +69,6 @@ struct Args : argparse::Args {
         f.scale_intervals = scaleIntervals;
         f.scaling_threshold = scaleValue;
 
-        f.grid_graph = grid;
-        f.gridm = gridm;
-        f.gridn = gridn;
         f.grid_multip = gpuGridMultiplier;
 
         f.calculation_half_precision = use32bitCalculation;
