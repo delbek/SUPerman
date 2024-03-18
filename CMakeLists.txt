@@ -14,10 +14,10 @@ find_package(MPI)
 include_directories(${CUDA_INCLUDE_DIRS})
 
 # Source files
-set(COMMON_HEADER_FILES args.hpp cpu_algos.hpp flags.h MatrixMarketIOLibrary.h read_matrix.hpp util.h AlgorithmRecommender.h)
-set(COMMON_SOURCE_FILES main.cpp MatrixMarketIOLibrary.cpp AlgorithmRecommender.cpp)
+set(COMMON_HEADER_FILES args.hpp cpu_algos.hpp flags.h MatrixMarketIOLibrary.h read_matrix.hpp util.h)
+set(COMMON_SOURCE_FILES main.cpp MatrixMarketIOLibrary.cpp)
 set(CUDA_HEADER_FILES gpu_wrappers.h)
-set(CUDA_SOURCE_FILES gpu_exact_dense.cu gpu_exact_sparse.cu gpu_approximation_dense.cu gpu_approximation_sparse.cu)
+set(CUDA_SOURCE_FILES gpu_exact_dense.cu gpu_exact_sparse.cu)
 
 # CPU-only Executable
 add_executable(cpu_perman ${COMMON_HEADER_FILES} ${COMMON_SOURCE_FILES})
