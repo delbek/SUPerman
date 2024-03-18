@@ -60,7 +60,7 @@ This document provides practical examples of how to run SUPerman with various co
 
 9. **High Precision Sparse Matrix Calculation on CPU**
     ```bash
-    ./cpu_perman ex.mtx -s -p 1 -c -t 32 -q -v
+    ./cpu_perman ex.mtx -s -p 1 -c -t 32 --calculate-128bit --storage-128bit
     ```
    Executes `parallel_perman_sparse()` with 32 threads, using a 128-bit data type for both calculation and storage.
 

@@ -17,7 +17,6 @@ where `FILE` is the path to the matrix.
 
 - `-p, --perman <id>`: Selects the algorithm for permanent calculation. Default is `0`.
 - `-s, --sparse`: If set, the sparse algorithm is used for computation. By default, a dense algorithm is chosen.
-- `-a, --approximation`: Enables the approximation algorithm. If not set, an exact algorithm is used by default.
 - `-b, --binary`: Treats the input matrix as binary, where all non-zero values are considered to be 1.
 
 ### Hardware Configuration
@@ -41,13 +40,6 @@ where `FILE` is the path to the matrix.
 - `--scale <value>`: Scales the input matrix to the specified value. Default is `1.0`.
 - `-y, --scale-intervals <number>`: Defines scale intervals for a scaling approximation algorithm. Default is `4`.
 - `-z, --scale-count <number>`: Indicates the number of times to scale for a scaling approximation algorithm. Default is `5`.
-- `-x, --trials <number>`: Sets the number of trials for an approximation algorithm. Default is `100000`.
-
-### Grid Graphs
-
-- `-i, --grid`: Creates a grid graph using the dimensions specified by `--grid-m` and `--grid-n`.
-- `-m, --grid-m <dimension>`: Sets the first dimension of the grid graph. Default is `36`.
-- `-n, --grid-n <dimension>`: Specifies the second dimension of the grid graph. Default is `36`.
 
 ### Miscellaneous
 

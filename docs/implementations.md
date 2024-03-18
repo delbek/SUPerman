@@ -10,20 +10,11 @@ SUPerman offers a wide range of algorithms for computing the permanent of matric
 | `parallel_perman64_sparse()`                             | CPU        | Exact       | Sparse      | Yes      | 1-64    | No       | 1       | No            | Yes    | Optional (-r) | -r1            |
 | `parallel_skip_perman64_w()`                             | CPU        | Exact       | Sparse      | Yes      | 1-64    | No       | 2       | No            | Yes    | Optional (-r) | -r2            |
 | `parallel_skip_perman64_w_balanced()`                    | CPU        | Exact       | Sparse      | Yes      | 1-64    | No       | 3       | No            | Yes    | Optional (-r) | -r2            |
-| `rasmussen()`                                            | CPU        | Approx      | Dense       | Yes      | 1-64    | No       | 1       | Yes           | No     | None          |                |
-| `approximation_perman64()`                               | CPU        | Approx      | Dense       | Yes      | 1-64    | No       | 2       | Yes           | No     | None          |                |
-| `rasmussen_sparse()`                                     | CPU        | Approx      | Sparse      | Yes      | 1-64    | No       | 1       | Yes           | Yes    | None          |                |
-| `approximation_perman64_sparse()`                        | CPU        | Approx      | Sparse      | Yes      | 1-64    | No       | 2       | Yes           | Yes    | None          |                |
 | `gpu_perman64_xglobal()`                                 | GPU        | Exact       | Dense       | No       | -       | Yes      | 21      | No            | No     | None          |                |
 | `gpu_perman64_xlocal()`                                  | GPU        | Exact       | Dense       | No       | -       | Yes      | 1       | No            | No     | None          |                |
-| ...                                                      |            |             |             |          |         |          |         |               |        |               |                |
 | `gpu_perman64_xshared_lbc_mshared_multigpucpu_chunks()`  | GPU+CPU    | Exact       | Dense       | Optional | 1-64    | Yes      | 7       | No            | No     | None          |                |
 | `gpu_perman64_xlocal_sparse()`                           | GPU        | Exact       | Sparse      | No       | -       | Yes      | 1       | No            | Yes    | Optional (-r) | -r1            |
 | `gpu_perman64_xshared_sparse()`                          | GPU        | Exact       | Sparse      | No       | -       | Yes      | 2       | No            | Yes    | Optional (-r) | -r1            |
-| ...                                                      |            |             |             |          |         |          |         |               |        |               |                |
-| `gpu_perman64_approximation_shared_multigpucpu_chunks()` | GPU+CPU    | Approx      | Dense       | Optional | 1-64    | Yes      | 8       | Yes           | No     | None          |                |
-| `gpu_perman64_rasmussen_global_sparse()`                 | GPU        | Approx      | Sparse      | No       | -       | Yes      | 1       | Yes           | Yes    | None          |                |
-| ...                                                      |            |             |             |          |         |          |         |               |        |               |                |
 
 ### Legend
 
@@ -34,7 +25,6 @@ SUPerman offers a wide range of algorithms for computing the permanent of matric
 - **Threads (`-t`)**: The range of CPU threads that can be utilized.
 - **GPU Flag (`-g`)**: Specifies if the algorithm supports execution on GPU.
 - **Algo ID (`-p`)**: The identifier used to select the algorithm via command-line.
-- **Approximation (`-a`)**: Indicates if the algorithm performs approximation calculations.
 - **Sparse (`-s`)**: Denotes whether the algorithm is optimized for sparse matrices.
 - **Preprocessing (`-r`)**: Specifies if preprocessing can be applied, and under what conditions.
 - **Assumption**: Any specific assumptions or conditions unique to the algorithm.
