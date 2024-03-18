@@ -5,16 +5,18 @@
 #include "AlgorithmRecommender.h"
 
 
-Recommendation AlgorithmRecommender::recommendAlgorithm(const char *filename, bool onGPU)
+Recommendation AlgorithmRecommender::m_Recommendation;
+
+Recommendation AlgorithmRecommender::recommendAlgorithm(const char *filename, bool onGPU, int RANK)
 {
-    AlgorithmRecommender::analyzeFile(filename);
+    AlgorithmRecommender::analyzeFile(filename, RANK);
     AlgorithmRecommender::isBinaryFile(filename);
     AlgorithmRecommender::determineAlgorithm(onGPU);
 
-    return m_Recommendation;
+    return AlgorithmRecommender::AlgorithmRecommender::m_Recommendation;
 }
 
-void AlgorithmRecommender::analyzeFile(const char* filename)
+void AlgorithmRecommender::analyzeFile(const char* filename, int RANK)
 {
     FILE* f;
     MM_typecode matcode;
@@ -27,15 +29,15 @@ void AlgorithmRecommender::analyzeFile(const char* filename)
         exit(1);
     }
 
-    if (mm_is_real(matcode) != 1)
-    {
-        // CHECK THIS PART OUT LATER
-        exit(1);
-    }
-
     if(mm_read_banner(f, &matcode) != 0)
     {
         if(RANK==0) printf("Could not process Matrix Market Banner, exiting.. \n");
+        exit(1);
+    }
+
+    if (mm_is_real(matcode) != 1)
+    {
+        // CHECK THIS PART OUT LATER
         exit(1);
     }
 
@@ -70,33 +72,33 @@ void AlgorithmRecommender::analyzeFile(const char* filename)
     }
 
     if(mm_is_pattern(matcode) == 1)
-        m_Recommendation.isPatternSymmetric = true;
+        AlgorithmRecommender::m_Recommendation.isPatternSymmetric = true;
     else
-        m_Recommendation.isPatternSymmetric = false;
+        AlgorithmRecommender::m_Recommendation.isPatternSymmetric = false;
 
     if(mm_is_symmetric(matcode) == 1 || mm_is_skew(matcode))
     {
-        m_Recommendation.isSymmetric = true;
+        AlgorithmRecommender::m_Recommendation.isSymmetric = true;
         nnz *= 2;
     }
     else
     {
-        m_Recommendation.isSymmetric = false;
+        AlgorithmRecommender::m_Recommendation.isSymmetric = false;
     }
 
-    m_Recommendation.M = M;
-    m_Recommendation.N = N;
-    m_Recommendation.nnz = nnz;
+    AlgorithmRecommender::m_Recommendation.M = M;
+    AlgorithmRecommender::m_Recommendation.N = N;
+    AlgorithmRecommender::m_Recommendation.nnz = nnz;
 
     fclose(f);
 
     if (isBinaryFile(filename))
     {
-        m_Recommendation.isBinary = true;
+        AlgorithmRecommender::m_Recommendation.isBinary = true;
     }
     else
     {
-        m_Recommendation.isBinary = false;
+        AlgorithmRecommender::m_Recommendation.isBinary = false;
     }
 }
 
@@ -111,7 +113,7 @@ bool AlgorithmRecommender::isBinaryFile(const char *filename)
 
     std::string firstLine;
     std::getline(file, firstLine);
-    int spaceCount;
+    int spaceCount = 0;
     for (const auto& c: firstLine)
     {
         if (c == ' ')
@@ -136,41 +138,41 @@ bool AlgorithmRecommender::isBinaryFile(const char *filename)
     return true;
 }
 
-void AlgorithmRecommender::determineAlgorithm(bool onGPU, bool isApproximation)
+void AlgorithmRecommender::determineAlgorithm(bool onGPU)
 {
     // ASK THE CORRECTNESS OF THE FOLLOWING ALGORITHM DETERMINATION
     // ALSO ASK INTO WHERE OTHER ALGORITHMS SHOULD BE INJECTED (RASMUSSEN, SKIP ORDER BALANCED etc.)
 
-    double sparsity = (m_Recommendation.nnz / (m_Recommendation.M * m_Recommendation.N)) * 100;
+    double sparsity = (AlgorithmRecommender::m_Recommendation.nnz / (AlgorithmRecommender::m_Recommendation.M * AlgorithmRecommender::m_Recommendation.N)) * 100;
 
     if (onGPU)
     {
         if (sparsity < 50)
         {
-            m_Recommendation.algorithm = ParallelPermanSortOrder;
-            m_Recommendation.type = Sparse;
+            AlgorithmRecommender::m_Recommendation.algorithm = ParallelPermanSortOrder;
+            AlgorithmRecommender::m_Recommendation.type = Sparse;
         }
         else
         {
-            m_Recommendation.algorithm = ParalelPerman;
-            m_Recommendation.type = Dense;
+            AlgorithmRecommender::m_Recommendation.algorithm = ParallelPerman;
+            AlgorithmRecommender::m_Recommendation.type = Dense;
         }
         return;
     }
 
     if (sparsity < 30)
     {
-        m_Recommendation.algorithm = ParallelPermanSkipOrder;
-        m_Recommendation.type = Sparse;
+        AlgorithmRecommender::m_Recommendation.algorithm = ParallelPermanSkipOrder;
+        AlgorithmRecommender::m_Recommendation.type = Sparse;
     }
     else if (sparsity > 30 && sparsity < 50)
     {
-        m_Recommendation.algorithm = ParallelPermanSortOrder;
-        m_Recommendation.type = Sparse;
+        AlgorithmRecommender::m_Recommendation.algorithm = ParallelPermanSortOrder;
+        AlgorithmRecommender::m_Recommendation.type = Sparse;
     }
     else
     {
-        m_Recommendation.algorithm = ParalelPerman;
-        m_Recommendation.type = Dense;
+        AlgorithmRecommender::m_Recommendation.algorithm = ParallelPerman;
+        AlgorithmRecommender::m_Recommendation.type = Dense;
     }
 }

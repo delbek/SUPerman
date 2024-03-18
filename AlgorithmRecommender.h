@@ -9,6 +9,7 @@
 #include <string>
 #include <fstream>
 #include "MatrixMarketIOLibrary.h"
+#include <stdio.h>
 
 
 enum MatrixTypes
@@ -19,7 +20,7 @@ enum MatrixTypes
 
 enum Algorithms
 {
-    ParalelPerman,
+    ParallelPerman,
     ParallelPermanSkipOrder,
     ParallelPermanSkipOrderBalanced,
     ParallelPermanSortOrder,
@@ -44,11 +45,10 @@ struct Recommendation
 class AlgorithmRecommender
 {
 public:
-    static Recommendation recommendAlgorithm(const char* filename, bool onGPU);
-
+    static Recommendation recommendAlgorithm(const char* filename, bool onGPU, int RANK);
 
 private:
-    static void analyzeFile(const char* filename);
+    static void analyzeFile(const char* filename, int RANK);
     static bool isBinaryFile(const char* filename);
     static void determineAlgorithm(bool onGPU);
 
