@@ -1394,7 +1394,6 @@ Result parallel_perman64(DenseMatrix<S>* densemat, flags flags) {
     while (i < my_end) {
       //compute the gray code
       k = __builtin_ctzll(i);
-      if(i < 100)std:cout << "i: " << i << " k: " << k << std::endl;
       gray ^= (one << k); // Gray-code order: 1,3,2,6,7,5,4,12,13,15,...
       //decide if subtract of not - if the kth bit of gray is one then 1, otherwise -1
       s = ((one << k) & gray) ? 1 : -1;
