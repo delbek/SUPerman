@@ -58,8 +58,6 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#algorithm-customization">Algorithm Customization</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#grid-graphs">Grid Graphs</a>
-    </li>
     <li class="toctree-l3"><a class="reference internal" href="#miscellaneous">Miscellaneous</a>
     </li>
         </ul>
@@ -111,7 +109,6 @@ where <code>FILE</code> is the path to the matrix.</p>
 <ul>
 <li><code>-p, --perman &lt;id&gt;</code>: Selects the algorithm for permanent calculation. Default is <code>0</code>.</li>
 <li><code>-s, --sparse</code>: If set, the sparse algorithm is used for computation. By default, a dense algorithm is chosen.</li>
-<li><code>-a, --approximation</code>: Enables the approximation algorithm. If not set, an exact algorithm is used by default.</li>
 <li><code>-b, --binary</code>: Treats the input matrix as binary, where all non-zero values are considered to be 1.</li>
 </ul>
 <h3 id="hardware-configuration">Hardware Configuration</h3>
@@ -135,13 +132,6 @@ where <code>FILE</code> is the path to the matrix.</p>
 <li><code>--scale &lt;value&gt;</code>: Scales the input matrix to the specified value. Default is <code>1.0</code>.</li>
 <li><code>-y, --scale-intervals &lt;number&gt;</code>: Defines scale intervals for a scaling approximation algorithm. Default is <code>4</code>.</li>
 <li><code>-z, --scale-count &lt;number&gt;</code>: Indicates the number of times to scale for a scaling approximation algorithm. Default is <code>5</code>.</li>
-<li><code>-x, --trials &lt;number&gt;</code>: Sets the number of trials for an approximation algorithm. Default is <code>100000</code>.</li>
-</ul>
-<h3 id="grid-graphs">Grid Graphs</h3>
-<ul>
-<li><code>-i, --grid</code>: Creates a grid graph using the dimensions specified by <code>--grid-m</code> and <code>--grid-n</code>.</li>
-<li><code>-m, --grid-m &lt;dimension&gt;</code>: Sets the first dimension of the grid graph. Default is <code>36</code>.</li>
-<li><code>-n, --grid-n &lt;dimension&gt;</code>: Specifies the second dimension of the grid graph. Default is <code>36</code>.</li>
 </ul>
 <h3 id="miscellaneous">Miscellaneous</h3>
 <ul>
